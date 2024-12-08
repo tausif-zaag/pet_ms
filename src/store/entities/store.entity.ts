@@ -2,8 +2,8 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    ManyToMany,
     ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
@@ -21,7 +21,7 @@ export class Store {
     @ManyToOne(() => Pet, (pet) => pet.store)
     pets: Pet[];
 
-    @ManyToMany(() => Stuff, (stuff) => stuff.store)
+    @OneToMany(() => Stuff, (stuff) => stuff.store)
     stuffs: Stuff[];
 
     @CreateDateColumn()

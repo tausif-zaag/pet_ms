@@ -15,7 +15,7 @@ export class StoreService {
     }
 
     async findAll() {
-        return this.storeRepository.find();
+        return this.storeRepository.find({ relations: ['stuffs'] });
     }
 
     async findOne(id: number) {
@@ -46,4 +46,18 @@ export class StoreService {
 
         return this.storeRepository.remove(store);
     }
+
+    async getStuffsByStoreId(storeId: number) {
+        const store = await this.storeRepository.findOne({
+            where: { id: storeId },
+            relations: ['stuffs'],
+        });
+
+        if (!store) {
+            throw new HttpException(`Store with ID ${storeId} not found.`, HttpStatus.NOT_FOUND);
+        }
+
+        return store.stuffs;
+    }
+
 }

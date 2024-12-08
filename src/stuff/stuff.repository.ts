@@ -11,6 +11,7 @@ export class StuffRepository extends Repository<Stuff> {
     async findById(id: number) {
         return await this.findOne({
             where: { id: id },
+            relations: ['store'],
         });
     }
 

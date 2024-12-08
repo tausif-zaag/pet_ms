@@ -36,4 +36,10 @@ export class StoreController {
     remove(@Param('id') id: string) {
         return this.storeService.remove(+id);
     }
+
+    @Public()
+    @Get('stuffs-list/:id')
+    getStuffsByStoreId(@Param('id') id: number) {
+        return this.storeService.getStuffsByStoreId(id);
+    }
 }
