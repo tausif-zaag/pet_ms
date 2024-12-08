@@ -13,13 +13,14 @@ import { PetModule } from './pet/pet.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { PurchaseModule } from './purchase/purchase.module';
 import { databaseConfig } from './config/database.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [ConfigModule.forRoot({
         isGlobal: true,
     }),
         TypeOrmModule.forRoot(databaseConfig),
-        CategoryModule, OwnerModule, SupplierModule, StoreModule, StuffModule, PetModule, InventoryModule, PurchaseModule],
+        CategoryModule, OwnerModule, SupplierModule, StoreModule, StuffModule, PetModule, InventoryModule, PurchaseModule, AuthModule],
     controllers: [AppController],
     providers: [AppService],
 })
