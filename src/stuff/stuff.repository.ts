@@ -18,15 +18,15 @@ export class StuffRepository extends Repository<Stuff> {
     async findAll() {
         return await this
             .createQueryBuilder('stuff')
-            .leftJoinAndSelect('stuff.store', 'store')  // Join the category relation
+            .leftJoinAndSelect('stuff.store', 'store')
             .select([
                 'stuff.id',
                 'stuff.first_name',
                 'stuff.age',
-                'store.id',      // Select only the id of the store
-                'store.name',    // Select only the name of the store
+                'store.id',
+                'store.name',
             ])
-            .getMany();  // Executes the query and returns the results
+            .getMany();
     }
 
 }
