@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { createDatabaseIfNotExists } from './config/database.config';
 import { configureWebSettings } from './config/web.config';
 import { envConfig } from './constants/env.constant';
+import { CustomLoggerService } from './logging/logger.service';
 
 async function bootstrap() {
     await createDatabaseIfNotExists();
@@ -14,6 +15,21 @@ async function bootstrap() {
     app.useGlobalPipes(new ValidationPipe());
 
     configureWebSettings(app);
+    const customLogger = app.get(CustomLoggerService);
+    app.useLogger(customLogger); // Register custom logger
+    // app.use(faviconMiddleware); // Apply favicon middleware
+
+    // Log application start
+    customLogger.log('Application is starting...');
+
+    process.on('unhandledRejection', (reason: any) => {
+        customLogger.error(reason);
+    });
+
+    process.on('uncaughtException', (error: Error) => {
+        customLogger.error(error);
+        process.exit(1);
+    });
 
     const config = new DocumentBuilder()
         .setTitle('Pet Shop')

@@ -82,19 +82,23 @@ export class OwnerService {
         await queryRunner.startTransaction();
 
         try {
-            // Set 'is_adopted' to false and unlink the owner_id for all pets
-            await queryRunner.manager
-                .createQueryBuilder()
-                .update(Pet)
-                .set({ is_adopted: false, owner: null })
-                .where('owner_id = :ownerId', { ownerId: id })
-                .execute();
+            // // Set 'is_adopted' to false and unlink the owner_id for all pets
+            // await queryRunner.manager
+            //     .createQueryBuilder()
+            //     .update(Pet)
+            //     .set({ is_adopted: false, owner: null })
+            //     .where('owner_id = :ownerId', { ownerId: id })
+            //     .execute();
+            //
+            // // Remove the owner
+            // await queryRunner.manager.remove(owner);
+            //
+            // // Commit the transaction
+            // await queryRunner.commitTransaction();
 
-            // Remove the owner
-            await queryRunner.manager.remove(owner);
-
-            // Commit the transaction
-            await queryRunner.commitTransaction();
+            await this.ownerRepository.manager.transaction(async (transactionalManager) => {
+                transactionalManager.createQueryBuilder().update(Pet);
+            });
         } catch (error) {
             // Rollback the transaction in case of error
             await queryRunner.rollbackTransaction();

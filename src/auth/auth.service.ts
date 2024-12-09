@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { OwnerRepository } from '../owner/owner.repository';
+import { OwnerRepository } from '../modules/owner/owner.repository';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()

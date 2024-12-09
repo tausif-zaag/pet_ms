@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { jwtConstants } from './constants';
-import { OwnerRepository } from '../owner/owner.repository';
+import { OwnerRepository } from '../modules/owner/owner.repository';
 import { AuthGuard } from './auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 

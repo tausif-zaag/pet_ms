@@ -1,5 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany } from 'typeorm';
-import { IsPhoneNumber } from 'class-validator';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Pet } from '../../pet/entities/pet.entity';
 
 @Entity('owner')
@@ -24,7 +23,7 @@ export class Owner {
 
     @Column({ nullable: false })
     password: string;
-    
+
     @OneToMany(() => Pet, (pet) => pet.owner)
     pets: Pet[];
 
