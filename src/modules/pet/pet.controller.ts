@@ -5,8 +5,7 @@ import { UpdatePetDto } from './dto/update-pet.dto';
 
 @Controller('pet')
 export class PetController {
-    constructor(private readonly petService: PetService) {
-    }
+    constructor(private readonly petService: PetService) {}
 
     @Post()
     create(@Body() createPetDto: CreatePetDto) {
@@ -14,12 +13,7 @@ export class PetController {
     }
 
     @Get()
-    findAll(
-        @Query('categoryId') categoryId?: number,
-        @Query('page') page: number = 1,
-        @Query('limit') limit: number = 10,
-        @Query('isAdopted') isAdopted: boolean = false,
-    ) {
+    findAll(@Query('categoryId') categoryId?: number, @Query('page') page: number = 1, @Query('limit') limit: number = 10, @Query('isAdopted') isAdopted: boolean = false) {
         console.debug('CategoryId [PetController] ' + categoryId);
         return this.petService.findAll(categoryId, page, limit, isAdopted);
     }
@@ -44,5 +38,4 @@ export class PetController {
         console.debug('petId [PetController] ' + petId, ownerId);
         return await this.petService.adoptPet(petId, ownerId);
     }
-
 }

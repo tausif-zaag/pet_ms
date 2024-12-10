@@ -6,8 +6,7 @@ import { Category } from './entities/category.entity';
 
 @Injectable()
 export class CategoryService {
-    constructor(private readonly categoryRepository: CategoryRepository) {
-    }
+    constructor(private readonly categoryRepository: CategoryRepository) {}
 
     async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
         const { name } = createCategoryDto;

@@ -11,5 +11,4 @@ import { Store } from './entities/store.entity';
     providers: [StoreService, StoreRepository],
     exports: [StoreService, StoreRepository],
 })
-export class StoreModule {
-}
+export class StoreModule {}

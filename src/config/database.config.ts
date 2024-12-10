@@ -31,9 +31,9 @@ export const createDatabaseIfNotExists = async () => {
         const dbName = envConfig.DB_NAME;
 
         // Check if the database exists
-        const result = await client.query(
-            `SELECT 1 FROM pg_database WHERE datname = '${dbName}'`,
-        );
+        const result = await client.query(`SELECT 1
+                                           FROM pg_database
+                                           WHERE datname = '${dbName}'`);
 
         // If the database doesn't exist, create it
         if (result.rowCount === 0) {
@@ -62,10 +62,11 @@ export const setInitialSequenceValues = async () => {
     try {
         // Query to get only sequences linked to primary key columns
         const { rows: sequences } = await pool.query(`
-      SELECT pg_get_serial_sequence(table_name, column_name) AS sequence_name
-      FROM information_schema.columns
-      WHERE column_default LIKE 'nextval%' AND table_schema = 'public';
-    `);
+            SELECT pg_get_serial_sequence(table_name, column_name) AS sequence_name
+            FROM information_schema.columns
+            WHERE column_default LIKE 'nextval%'
+              AND table_schema = 'public';
+        `);
 
         for (const row of sequences) {
             const sequenceName = row.sequence_name;
@@ -73,7 +74,8 @@ export const setInitialSequenceValues = async () => {
                 try {
                     // Check current value of the sequence
                     const { rows: currentValRows } = await pool.query(
-                        `SELECT last_value FROM ${sequenceName}`,
+                        `SELECT last_value
+                         FROM ${sequenceName}`,
                     );
                     const currentVal = currentValRows[0].last_value;
 
@@ -82,15 +84,10 @@ export const setInitialSequenceValues = async () => {
                         await pool.query(`ALTER SEQUENCE ${sequenceName} RESTART WITH 101`);
                         console.log(`Sequence ${sequenceName} set to start from 101.`);
                     } else {
-                        console.log(
-                            `Sequence ${sequenceName} current value (${currentVal}) is not 1. Skipping reset.`,
-                        );
+                        console.log(`Sequence ${sequenceName} current value (${currentVal}) is not 1. Skipping reset.`);
                     }
                 } catch (error) {
-                    console.error(
-                        `Failed to check/set sequence for ${sequenceName}:`,
-                        error,
-                    );
+                    console.error(`Failed to check/set sequence for ${sequenceName}:`, error);
                 }
             }
         }

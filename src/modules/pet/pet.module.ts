@@ -16,17 +16,7 @@ import { OwnerRepository } from '../owner/owner.repository';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Pet, Owner, Category, Store])],
-    providers: [
-        PetService,
-        PetRepository,
-        CategoryService,
-        StoreService,
-        OwnerService,
-        CategoryRepository,
-        StoreRepository,
-        OwnerRepository,
-    ],
+    providers: [PetService, PetRepository, CategoryService, StoreService, OwnerService, CategoryRepository, StoreRepository, OwnerRepository],
     controllers: [PetController],
 })
-export class PetModule {
-}
+export class PetModule {}

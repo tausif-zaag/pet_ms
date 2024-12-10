@@ -3,18 +3,18 @@ import { PetController } from './pet.controller';
 import { PetService } from './pet.service';
 
 describe('PetController', () => {
-  let controller: PetController;
+    let controller: PetController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [PetController],
-      providers: [PetService],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            controllers: [PetController],
+            providers: [PetService],
+        }).compile();
 
-    controller = module.get<PetController>(PetController);
-  });
+        controller = module.get<PetController>(PetController);
+    });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    it('should be defined', () => {
+        expect(controller).toBeDefined();
+    });
 });

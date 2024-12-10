@@ -6,8 +6,10 @@ import { StoreService } from '../store/store.service';
 
 @Injectable()
 export class StuffService {
-    constructor(private readonly stuffRepository: StuffRepository, private readonly storeService: StoreService) {
-    }
+    constructor(
+        private readonly stuffRepository: StuffRepository,
+        private readonly storeService: StoreService,
+    ) {}
 
     async create(createStuffDto: CreateStuffDto) {
         const store = await this.storeService.findOne(createStuffDto.store_id);
@@ -53,7 +55,6 @@ export class StuffService {
         Object.assign(stuff, updateStuffDto);
         return await this.stuffRepository.save(stuff);
     }
-
 
     async remove(id: number) {
         const stuff = await this.stuffRepository.findById(id);

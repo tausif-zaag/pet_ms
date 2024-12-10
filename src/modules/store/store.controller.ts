@@ -6,8 +6,7 @@ import { Public } from '../../common/decorators/public.decorator';
 
 @Controller('store')
 export class StoreController {
-    constructor(private readonly storeService: StoreService) {
-    }
+    constructor(private readonly storeService: StoreService) {}
 
     @Public()
     @Post()

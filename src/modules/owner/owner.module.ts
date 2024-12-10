@@ -11,5 +11,4 @@ import { PetRepository } from '../pet/pet.repository';
     controllers: [OwnerController],
     providers: [OwnerService, OwnerRepository, PetRepository],
 })
-export class OwnerModule {
-}
+export class OwnerModule {}

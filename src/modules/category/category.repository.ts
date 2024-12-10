@@ -31,5 +31,4 @@ export class CategoryRepository extends Repository<Category> {
 
         return !!category;
     }
-
 }

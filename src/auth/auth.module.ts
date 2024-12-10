@@ -8,22 +8,22 @@ import { OwnerRepository } from '../modules/owner/owner.repository';
 import { AuthGuard } from './auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 
-
 @Module({
     imports: [
         JwtModule.register({
             global: true,
             secret: jwtConstants.secret,
             signOptions: { expiresIn: '24h' },
-        })],
+        }),
+    ],
     providers: [
         AuthService,
         OwnerRepository,
         {
             provide: APP_GUARD,
             useClass: AuthGuard,
-        }],
+        },
+    ],
     controllers: [AuthController],
 })
-export class AuthModule {
-}
+export class AuthModule {}

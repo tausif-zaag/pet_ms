@@ -6,8 +6,7 @@ import { Public } from '../../common/decorators/public.decorator';
 
 @Controller('owner')
 export class OwnerController {
-    constructor(private readonly ownerService: OwnerService) {
-    }
+    constructor(private readonly ownerService: OwnerService) {}
 
     // Create a new owner
     @Public()

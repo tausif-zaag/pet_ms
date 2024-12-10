@@ -9,5 +9,4 @@ import { StoreModule } from '../store/store.module';
     controllers: [StuffController],
     providers: [StuffService, StuffRepository],
 })
-export class StuffModule {
-}
+export class StuffModule {}

@@ -20,7 +20,11 @@ export class PetRepository extends Repository<Pet> {
         page: number = 1,
         limit: number = 10,
         isAdopted: boolean = false,
-    ): Promise<{ data: Pet[], totalCount: number, totalPages: number }> {
+    ): Promise<{
+        data: Pet[];
+        totalCount: number;
+        totalPages: number;
+    }> {
         const maxLimit = 100; // Maximum items per page
         limit = Math.min(Math.max(limit, 1), maxLimit);
 
@@ -54,12 +58,11 @@ export class PetRepository extends Repository<Pet> {
             queryBuilder.where('pet.category_id = :categoryId', { categoryId });
         }
 
-
         // Fetch the data and total count
         const [data, totalCount] = await queryBuilder
             .skip((page - 1) * limit) // Calculate the number of items to skip
-            .take(limit)              // Limit the number of items per page
-            .getManyAndCount();       // Get the data and total count
+            .take(limit) // Limit the number of items per page
+            .getManyAndCount(); // Get the data and total count
 
         // Calculate total pages based on totalCount and limit
         const totalPages = Math.ceil(totalCount / limit);
@@ -70,5 +73,4 @@ export class PetRepository extends Repository<Pet> {
             totalPages,
         };
     }
-
 }

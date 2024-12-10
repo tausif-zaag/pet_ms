@@ -17,13 +17,22 @@ import { AuthModule } from './auth/auth.module';
 import { CustomLoggerService } from './logging/logger.service';
 
 @Module({
-    imports: [ConfigModule.forRoot({
-        isGlobal: true,
-    }),
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+        }),
         TypeOrmModule.forRoot(databaseConfig),
-        CategoryModule, OwnerModule, SupplierModule, StoreModule, StuffModule, PetModule, InventoryModule, PurchaseModule, AuthModule],
+        CategoryModule,
+        OwnerModule,
+        SupplierModule,
+        StoreModule,
+        StuffModule,
+        PetModule,
+        InventoryModule,
+        PurchaseModule,
+        AuthModule,
+    ],
     controllers: [AppController],
     providers: [AppService, CustomLoggerService],
 })
-export class AppModule {
-}
+export class AppModule {}

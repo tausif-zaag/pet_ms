@@ -14,5 +14,4 @@ export class StoreRepository extends Repository<Store> {
             where: { id: id },
         });
     }
-
 }

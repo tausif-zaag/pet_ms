@@ -5,8 +5,7 @@ import { StoreRepository } from './store.repository';
 
 @Injectable()
 export class StoreService {
-    constructor(private readonly storeRepository: StoreRepository) {
-    }
+    constructor(private readonly storeRepository: StoreRepository) {}
 
     async create(createStoreDto: CreateStoreDto) {
         const store = await this.storeRepository.create(createStoreDto);
@@ -59,5 +58,4 @@ export class StoreService {
 
         return store.stuffs;
     }
-
 }

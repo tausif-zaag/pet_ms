@@ -8,8 +8,10 @@ import { PetRepository } from '../pet/pet.repository';
 
 @Injectable()
 export class OwnerService {
-    constructor(private readonly ownerRepository: OwnerRepository, private readonly petRepository: PetRepository) {
-    }
+    constructor(
+        private readonly ownerRepository: OwnerRepository,
+        private readonly petRepository: PetRepository,
+    ) {}
 
     async create(createOwnerDto: CreateOwnerDto) {
         // Check for duplicate email
@@ -108,5 +110,4 @@ export class OwnerService {
             await queryRunner.release();
         }
     }
-
 }

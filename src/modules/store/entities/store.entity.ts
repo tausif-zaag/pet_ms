@@ -1,12 +1,4 @@
-import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    ManyToOne,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Pet } from '../../pet/entities/pet.entity';
 import { Stuff } from '../../stuff/entities/stuff.entity';
 
@@ -29,5 +21,4 @@ export class Store {
 
     @UpdateDateColumn()
     updatedAt: Date;
-
 }

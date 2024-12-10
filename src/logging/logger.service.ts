@@ -46,8 +46,7 @@ export class CustomLoggerService implements LoggerService {
     // Live request logging
     logRequest(req: Request) {
         // Get the client IP address
-        const clientIpRaw =
-            req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        const clientIpRaw = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
         // Handle the case where clientIpRaw can be a string or an array of strings
         const clientIp = Array.isArray(clientIpRaw) ? clientIpRaw[0] : clientIpRaw;
@@ -84,11 +83,8 @@ export class CustomLoggerService implements LoggerService {
 
     logResponse(req: Request, res: Response, responseBody: any) {
         const status = res.statusCode;
-        const responsePayload =
-            status === 200 || status === 201 ? 'success' : responseBody;
-        this.logger.info(
-            `Response => url: ${req.originalUrl}, method: ${req.method}, status: ${status}, body: ${JSON.stringify(responsePayload)}`,
-        );
+        const responsePayload = status === 200 || status === 201 ? 'success' : responseBody;
+        this.logger.info(`Response => url: ${req.originalUrl}, method: ${req.method}, status: ${status}, body: ${JSON.stringify(responsePayload)}`);
     }
 
     logRequestBody(req: Request, body: any) {
@@ -157,9 +153,7 @@ export class CustomLoggerService implements LoggerService {
                 format.errors({ stack: true }), // Include stack trace in the logs
                 format.printf(({ timestamp, level, message, stack }) => {
                     // If an error object is passed, log the stack trace; otherwise, log the message.
-                    return stack
-                        ? `${timestamp} ${level.toUpperCase()}: ${message} - Stack: ${stack}`
-                        : `${timestamp} ${level.toUpperCase()}: ${message}`;
+                    return stack ? `${timestamp} ${level.toUpperCase()}: ${message} - Stack: ${stack}` : `${timestamp} ${level.toUpperCase()}: ${message}`;
                 }),
             ),
             transports: [
@@ -169,9 +163,7 @@ export class CustomLoggerService implements LoggerService {
                         format.timestamp(),
                         format.errors({ stack: true }), // Include stack trace in console logs as well
                         format.printf(({ timestamp, level, message, stack }) => {
-                            return stack
-                                ? `${timestamp} ${level}: ${message} - Stack: ${stack}`
-                                : `${timestamp} ${level}: ${message}`;
+                            return stack ? `${timestamp} ${level}: ${message} - Stack: ${stack}` : `${timestamp} ${level}: ${message}`;
                         }),
                     ),
                 }),
@@ -190,10 +182,7 @@ export class CustomLoggerService implements LoggerService {
     private rotateLog() {
         const date = new Date();
         const dateString = `${date.getFullYear()}_${this.getMonthName(date.getMonth())}_${date.getDate()}`;
-        const archiveFileName = path.join(
-            this.archiveDirectory,
-            `${dateString}_${this.getNextFileIndex(dateString)}.log`,
-        );
+        const archiveFileName = path.join(this.archiveDirectory, `${dateString}_${this.getNextFileIndex(dateString)}.log`);
 
         fs.renameSync(this.currentLogFile, archiveFileName);
         this.createLogFile();
@@ -205,20 +194,7 @@ export class CustomLoggerService implements LoggerService {
     //===============================================================
 
     private getMonthName(monthIndex: number): string {
-        const monthNames = [
-            'JAN',
-            'FEB',
-            'MAR',
-            'APR',
-            'MAY',
-            'JUN',
-            'JUL',
-            'AUG',
-            'SEP',
-            'OCT',
-            'NOV',
-            'DEC',
-        ];
+        const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
         return monthNames[monthIndex];
     }
 

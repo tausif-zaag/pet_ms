@@ -13,8 +13,7 @@ export class PetService {
         private readonly categoryService: CategoryService,
         private readonly ownerService: OwnerService,
         private readonly storeService: StoreService,
-    ) {
-    }
+    ) {}
 
     async create(createPetDto: CreatePetDto) {
         let owner = null;
@@ -80,7 +79,6 @@ export class PetService {
         return await this.petRepository.save(pet);
     }
 
-
     async remove(id: number) {
         const pet = await this.petRepository.findById(id);
 
@@ -113,7 +111,5 @@ export class PetService {
         pet.is_adopted = true;
 
         return await this.petRepository.save(pet);
-
-
     }
 }

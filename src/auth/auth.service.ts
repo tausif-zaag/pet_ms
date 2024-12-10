@@ -5,14 +5,14 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(private ownersRepository: OwnerRepository, private jwtService: JwtService) {
-    }
+    constructor(
+        private ownersRepository: OwnerRepository,
+        private jwtService: JwtService,
+    ) {}
 
     async signIn(email: string, pass: string): Promise<{ access_token: string }> {
         console.log(email, pass);
-        const owner = await this.ownersRepository.createQueryBuilder('owner')
-            .where('owner.email = :email', { email })
-            .getOne();
+        const owner = await this.ownersRepository.createQueryBuilder('owner').where('owner.email = :email', { email }).getOne();
         console.log(owner);
         if (!owner) {
             throw new UnauthorizedException('Invalid credentials');

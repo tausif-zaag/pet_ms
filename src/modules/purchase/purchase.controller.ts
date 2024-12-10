@@ -5,30 +5,30 @@ import { UpdatePurchaseDto } from './dto/update-purchase.dto';
 
 @Controller('purchase')
 export class PurchaseController {
-  constructor(private readonly purchaseService: PurchaseService) {}
+    constructor(private readonly purchaseService: PurchaseService) {}
 
-  @Post()
-  create(@Body() createPurchaseDto: CreatePurchaseDto) {
-    return this.purchaseService.create(createPurchaseDto);
-  }
+    @Post()
+    create(@Body() createPurchaseDto: CreatePurchaseDto) {
+        return this.purchaseService.create(createPurchaseDto);
+    }
 
-  @Get()
-  findAll() {
-    return this.purchaseService.findAll();
-  }
+    @Get()
+    findAll() {
+        return this.purchaseService.findAll();
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.purchaseService.findOne(+id);
-  }
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.purchaseService.findOne(+id);
+    }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePurchaseDto: UpdatePurchaseDto) {
-    return this.purchaseService.update(+id, updatePurchaseDto);
-  }
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updatePurchaseDto: UpdatePurchaseDto) {
+        return this.purchaseService.update(+id, updatePurchaseDto);
+    }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.purchaseService.remove(+id);
-  }
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.purchaseService.remove(+id);
+    }
 }
