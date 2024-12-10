@@ -44,7 +44,7 @@ export class PetService {
             description: createPetDto.description,
             weight: createPetDto.weight,
             color: createPetDto.color,
-            is_adopted: createPetDto.is_adopted,
+            isAdopted: createPetDto.isAdopted,
             category,
             owner,
             store,
@@ -103,12 +103,12 @@ export class PetService {
         }
 
         // Check if the pet is already adopted
-        if (pet.is_adopted) {
+        if (pet.isAdopted) {
             throw new HttpException('This pet has already been adopted', HttpStatus.BAD_REQUEST);
         }
 
         pet.owner = owner;
-        pet.is_adopted = true;
+        pet.isAdopted = true;
 
         return await this.petRepository.save(pet);
     }

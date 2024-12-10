@@ -18,7 +18,7 @@ export class StuffRepository extends Repository<Stuff> {
     async findAll() {
         return await this.createQueryBuilder('stuff')
             .leftJoinAndSelect('stuff.store', 'store')
-            .select(['stuff.id', 'stuff.first_name', 'stuff.age', 'store.id', 'store.name'])
+            .select(['stuff.id', 'stuff.firstName', 'stuff.age', 'store.id', 'store.name'])
             .getMany();
     }
 }

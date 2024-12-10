@@ -6,11 +6,11 @@ export class Owner {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ length: 255, nullable: false })
-    first_name: string;
+    @Column({ name: 'first_name', length: 255, nullable: false })
+    firstName: string;
 
-    @Column({ nullable: true, length: 255 })
-    last_name: string;
+    @Column({ name: 'last_name', nullable: true, length: 255 })
+    lastName: string;
 
     @Column({ nullable: true, length: 255 })
     address: string;

@@ -26,8 +26,8 @@ export class Pet {
     @Column({ nullable: true })
     color: string;
 
-    @Column({ nullable: true })
-    is_adopted: boolean;
+    @Column({ name: 'is_adopted', nullable: true })
+    isAdopted: boolean;
 
     @ManyToOne(() => Category, (category) => category.pets)
     @JoinColumn({ name: 'category_id' })

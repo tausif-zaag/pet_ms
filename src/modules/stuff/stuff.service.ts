@@ -21,7 +21,7 @@ export class StuffService {
             ...createStuffDto,
             store: store,
         };
-        const stuff = await this.stuffRepository.create(payload);
+        const stuff = this.stuffRepository.create(payload);
 
         await this.stuffRepository.save(stuff);
     }

@@ -4,7 +4,7 @@ export class CreateStuffDto {
     @IsString()
     @IsNotEmpty()
     @MaxLength(255)
-    first_name: string;
+    firstName: string;
 
     @IsNumber()
     @IsOptional()

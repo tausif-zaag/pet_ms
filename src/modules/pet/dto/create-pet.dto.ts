@@ -30,7 +30,7 @@ export class CreatePetDto {
 
     @IsOptional()
     @IsBoolean()
-    is_adopted?: boolean;
+    isAdopted?: boolean;
 
     @IsNotEmpty()
     category_id: number;

@@ -77,37 +77,22 @@ export class OwnerService {
         if (!owner) {
             throw new HttpException(`Owner with ID ${id} not found`, HttpStatus.NOT_FOUND);
         }
-
-        const queryRunner = this.ownerRepository.manager.connection.createQueryRunner();
-
-        // Start a transaction
-        await queryRunner.startTransaction();
-
         try {
-            // // Set 'is_adopted' to false and unlink the owner_id for all pets
-            // await queryRunner.manager
-            //     .createQueryBuilder()
-            //     .update(Pet)
-            //     .set({ is_adopted: false, owner: null })
-            //     .where('owner_id = :ownerId', { ownerId: id })
-            //     .execute();
-            //
-            // // Remove the owner
-            // await queryRunner.manager.remove(owner);
-            //
-            // // Commit the transaction
-            // await queryRunner.commitTransaction();
-
             await this.ownerRepository.manager.transaction(async (transactionalManager) => {
-                transactionalManager.createQueryBuilder().update(Pet);
+                await transactionalManager
+                    .createQueryBuilder()
+                    .update(Pet)
+                    .set({
+                        is_adopted: false,
+                        owner: null,
+                    })
+                    .where('owner_id = :ownerId', { ownerId: id })
+                    .execute();
+
+                await transactionalManager.remove(owner);
             });
         } catch (error) {
-            // Rollback the transaction in case of error
-            await queryRunner.rollbackTransaction();
             throw error;
-        } finally {
-            // Release the query runner
-            await queryRunner.release();
         }
     }
 }

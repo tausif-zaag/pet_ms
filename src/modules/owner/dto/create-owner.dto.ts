@@ -3,12 +3,12 @@ import { IsEmail, IsOptional, IsString, Length, IsPhoneNumber } from 'class-vali
 export class CreateOwnerDto {
     @IsString()
     @Length(1, 255)
-    first_name: string;
+    firstName: string;
 
     @IsOptional()
     @IsString()
     @Length(1, 255)
-    last_name?: string;
+    lastName?: string;
 
     @IsOptional()
     @IsString()

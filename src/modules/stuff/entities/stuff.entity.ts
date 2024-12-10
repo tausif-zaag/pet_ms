@@ -7,11 +7,11 @@ export class Stuff {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ name: 'first_name' })
     @IsString()
     @IsNotEmpty()
     @MaxLength(255)
-    first_name: string;
+    firstName: string;
 
     @Column()
     @IsNumber()

@@ -42,17 +42,17 @@ export class PetRepository extends Repository<Pet> {
                 'pet.description',
                 'pet.weight',
                 'pet.color',
-                'pet.is_adopted',
+                'pet.isAdopted',
                 'category.id',
                 'category.name',
                 'owner.id',
-                'owner.first_name',
+                'owner.firstName',
                 'store.id',
                 'store.name',
             ]);
 
         // Default filter for isAdopted is false, but this can be overridden by the provided isAdopted value
-        queryBuilder.where('pet.is_adopted = :isAdopted', { isAdopted });
+        queryBuilder.where('pet.isAdopted = :isAdopted', { isAdopted });
 
         if (categoryId) {
             queryBuilder.where('pet.category_id = :categoryId', { categoryId });
